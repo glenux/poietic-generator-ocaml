@@ -1,0 +1,11 @@
+bin: [
+  "_build/poietic-cli.native" {"poietic-cli"}
+]
+lib: [
+]
+man: [
+]
+share: [
+]
+share_root: [
+]
