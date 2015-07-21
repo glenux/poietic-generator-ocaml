@@ -1,0 +1,7 @@
+opam-version: "1.2"
+name: "poietic-generator-ocaml"
+maintainer: "glenux@glenux.net"
+author: "Glenn Y. Rolland <glenux@glenux.net>"
+homepage: "http://poietic.net"
+bug-reports: "https://github.com/Gnuside/poietic-generator/issues"
+dev-repo: "https://github.com/Gnuside/poietic-generator.git"
