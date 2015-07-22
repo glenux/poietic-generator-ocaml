@@ -40,7 +40,6 @@ let handle_v1 = begin fun ressource_name ->
 end
 
 
-
 let patoumo_controler = 
   object (self) 
     method action_index = begin fun req ->
@@ -71,12 +70,12 @@ let action_index = begin fun req ->
   end 
 
 let ressource prefix_uri controler req = begin
-  let url_index = prefix_uri
-  and url_new = prefix_uri ^ "/new"
-  and url_create = prefix_uri
-  and url_show = prefix_uri ^ "/:id"
-  and url_edit = prefix_uri ^ "/:id/edit"
-  and url_update = prefix_uri ^ "/:id"
+  let url_index   = prefix_uri
+  and url_new     = prefix_uri ^ "/new"
+  and url_create  = prefix_uri
+  and url_show    = prefix_uri ^ "/:id"
+  and url_edit    = prefix_uri ^ "/:id/edit"
+  and url_update  = prefix_uri ^ "/:id"
   and url_destroy = prefix_uri ^ "/:id"
   in
   let route_for_index   = get    url_index   controler#action_index
