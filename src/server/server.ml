@@ -2,31 +2,6 @@
 open Core_kernel.Std
 open Opium.Std
 
-type person = {
-  name: string;
-  age: int;
-}
-
-let json_of_person { name ; age } =
-  let open Ezjsonm in
-  dict [ "name", (string name)
-       ; "age", (int age) ]
-
-(*
-let print_param = put "/hello/:name" begin fun req ->
-    `String ("Hello " ^ param req "name") |>respond'
-  end
-
-let print_person = get "/person/:name/:age" begin fun req ->
-    let person = {
-      name = param req "name";
-      age = "age" |> param req |> Int.of_string;
-    } in
-    `Json (person |> json_of_person |> Ezjsonm.wrap) |> respond'
-  end
-*)
-
-
 let handle_v1 = begin fun ressource_name -> 
   begin fun req ->
     let handle_get = get ressource_name begin fun req ->
@@ -67,8 +42,8 @@ let patoumo_controler =
   end
 
 let action_index = begin fun req ->
-    `String ("patoumo#index") |> respond'
-  end 
+  `String ("patoumo#index") |> respond'
+end 
 
 let ressource prefix_uri controler req = begin
   let url_index   = prefix_uri
@@ -83,7 +58,7 @@ let ressource prefix_uri controler req = begin
   and route_for_new     = get    url_new     controler#action_new
   and route_for_create  = post   url_create  controler#action_create
   and route_for_show    = get    url_show    controler#action_show
- 
+
   and route_for_edit    = get    url_edit    controler#action_edit
   and route_for_update  = put    url_update  controler#action_update
   and route_for_destroy = delete url_destroy controler#action_destroy
@@ -98,8 +73,21 @@ let ressource prefix_uri controler req = begin
   |> route_for_destroy
 end
 
+(* 
+ * FIXME: serve templates files (with jingoo)
+ * FIXME: prepare database (with ORM ?)
+ * FIXME: implement admin base (create, delete, etc.)
+ * FIXME: load configuration at startup from INI file
+ * *)
 let _ =
+  let static = begin
+    Middleware.static ~local_path:"./views" 
+                      ~uri_prefix:"/views" 
+  end
+  in
   App.empty
-  |> ressource "/patoumos" patoumo_controler
+  |> ressource "/group" patoumo_controler
+  |> ressource "/group/:id/session" patoumo_controler
+  |> ressource "/admin/:id/session" patoumo_controler
   |> App.run_command
 
