@@ -70,23 +70,23 @@ let action_index = begin fun req ->
     `String ("patoumo#index") |> respond'
   end 
 
-let ressource relative_url req = begin
-  let url_index = relative_url
-  and url_new = relative_url ^ "/new"
-  and url_create = relative_url
-  and url_show = relative_url ^ "/:id"
-  and url_edit = relative_url ^ "/:id/edit"
-  and url_update = relative_url ^ "/:id"
-  and url_destroy = relative_url ^ "/:id"
+let ressource prefix_uri controler req = begin
+  let url_index = prefix_uri
+  and url_new = prefix_uri ^ "/new"
+  and url_create = prefix_uri
+  and url_show = prefix_uri ^ "/:id"
+  and url_edit = prefix_uri ^ "/:id/edit"
+  and url_update = prefix_uri ^ "/:id"
+  and url_destroy = prefix_uri ^ "/:id"
   in
-  let route_for_index = get url_index patoumo_controler#action_index
-  and route_for_new = get url_new patoumo_controler#action_new
-  and route_for_create = post url_create patoumo_controler#action_create
-  and route_for_show = get url_show patoumo_controler#action_show
+  let route_for_index   = get    url_index   controler#action_index
+  and route_for_new     = get    url_new     controler#action_new
+  and route_for_create  = post   url_create  controler#action_create
+  and route_for_show    = get    url_show    controler#action_show
  
-  and route_for_edit = get url_edit patoumo_controler#action_edit
-  and route_for_update = put url_update patoumo_controler#action_update
-  and route_for_destroy = delete url_destroy patoumo_controler#action_destroy
+  and route_for_edit    = get    url_edit    controler#action_edit
+  and route_for_update  = put    url_update  controler#action_update
+  and route_for_destroy = delete url_destroy controler#action_destroy
   in
   req 
   |> route_for_index
@@ -102,6 +102,6 @@ end
 
 let _ =
   App.empty
-  |> ressource "/patoumos"
+  |> ressource "/patoumos" patoumo_controler
   |> App.run_command
 
