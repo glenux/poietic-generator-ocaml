@@ -1,1 +1,11 @@
-#true: strict_sequence
+# OCamlbuild tags file
+true: strict_sequence
+true: debug
+<**/*.ml{,i}> : annot, debug
+<src/core>: include
+<src/cli>: include
+<src/server>: include
+<src/server/*>: package(cow.syntax), package(opium)
+<src/bot>: include
+# Executable
+# <server.{native,byte}>: package(cow.syntax), package(opium)
