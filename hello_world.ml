@@ -90,14 +90,12 @@ let ressource prefix_uri controler req = begin
   in
   req 
   |> route_for_index
-  (*
   |> route_for_new
   |> route_for_create
   |> route_for_show
   |> route_for_edit
   |> route_for_update
   |> route_for_destroy
-  *)
 end
 
 let _ =
