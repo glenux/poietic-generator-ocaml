@@ -1,13 +1,16 @@
 
 open Core_kernel.Std
+open Opium_rock
 open Opium.Std
 
-type 'a ;;
-
 type controler_struct_t = {
-    action_index : controler_handle_t ;
-    action_new : controler_handle_t ;
-    action_create : controler_handle_t ;
+    action_index : Handler.t ;
+    action_new : Handler.t ;
+    action_create : Handler.t ;
+    action_show : Handler.t ;
+    action_edit : Handler.t ;
+    action_update : Handler.t ;
+    action_destroy : Handler.t ;
 }
 
 let patoumo_index = begin fun req ->
@@ -48,7 +51,7 @@ let patoumo_controler_struct = {
   action_destroy = patoumo_destroy ;
 }
 
-let patoumo_obj_controler = 
+let patoumo_controler_obj = 
   object (self) 
     method action_index = begin fun req ->
       (`String ("patoumo#index") |> respond')
@@ -88,8 +91,9 @@ let _ =
   in
   App.empty
   |> middleware static
-  |> PgRouter.ressource_obj "/group" patoumo_controler
-  |> PgRouter.ressource_obj "/group/:id/session" patoumo_controler
-  |> PgRouter.ressource_obj "/admin/:id/session" patoumo_controler
+  |> PgRouter.ressource_struct "/groupy" patoumo_controler_struct
+  |> PgRouter.ressource_obj "/group" patoumo_controler_obj
+  |> PgRouter.ressource_obj "/group/:id/session" patoumo_controler_obj
+  |> PgRouter.ressource_obj "/admin/:id/session" patoumo_controler_obj
   |> App.run_command
 
