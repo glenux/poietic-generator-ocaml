@@ -1,8 +1,5 @@
 # OCamlbuild tags file
-true: strict_sequence
-true: annot
-true: debug
-<**/*.ml{,i}> : annot, debug
+true: strict_sequence, annot, debug
 <src/core>: include
 <src/cli>: include
 <src/cli/*>: package(cmdliner)
