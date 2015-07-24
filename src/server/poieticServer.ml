@@ -10,7 +10,7 @@ type controler_struct_t = {
     action_show : Handler.t ;
     action_edit : Handler.t ;
     action_update : Handler.t ;
-    action_destroy : Handler.t ;
+    action_destroy : Handler.t
 }
 
 let patoumo_index = begin fun req ->
