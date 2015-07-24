@@ -1,10 +1,9 @@
 all: build
 
 build: 
-	corebuild server.native
-	@#corebuild cli.native
-	@#corebuild bot.native
-
+	corebuild poieticServer.native
+	corebuild poieticCli.native
+	corebuild poieticBot.native
 
 clean:
 	corebuild -clean

@@ -1,9 +1,11 @@
 # OCamlbuild tags file
 true: strict_sequence
+true: annot
 true: debug
 <**/*.ml{,i}> : annot, debug
 <src/core>: include
 <src/cli>: include
+<src/cli/*>: package(cmdliner)
 <src/server>: include
 <src/server/*>: package(cow.syntax), package(opium)
 <src/bot>: include
